@@ -1,28 +1,49 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <head-view></head-view>
+    <div class="content-box">
+      <left-view></left-view>
+      <center-view @currComp="currComp" :mycurrComp="mycurrComp"></center-view>
+      <right-view @updateComp="updateComp"  :mycurrComp="mycurrComp"></right-view>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import headView from './views/headViews.vue'
+import leftView from './views/leftViews.vue'
+import centerView from './views/centerView.vue'
+import rightView from './views/rightView.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    headView,
+    leftView,
+    centerView,
+    rightView
+
+  },
+  data(){
+    return {
+      mycurrComp:null
+    }
+  },
+  methods: {
+    updateComp(comp){
+       this.mycurrComp = comp
+    },
+    currComp(comp){
+       this.mycurrComp = comp
+    },
+   
   }
 }
 </script>
 
 <style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.content-box{
+  display: flex;
+  height:calc(100vh - 80px);
 }
 </style>
